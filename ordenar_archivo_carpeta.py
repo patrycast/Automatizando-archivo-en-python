@@ -4,10 +4,18 @@ import shutil
 ruta= input("Ingrese la ruta de la carpeta a organizar: ")
 
 #tipo de carpetas que vamos a crear
-tipos=["Imágenes", "PDFs", "Documentos_txt"]
+
+extensiones= {
+    ".jpg": "Imágenes",
+    ".jpeg": "Imágenes",
+    ".png": "Imágenes",
+    ".pdf": "PDFs",
+    ".odt": "PDFs",
+    ".txt": "Documentos_txt"
+}
 
 #crear carpetas si no existen
-for carpeta in tipos:
+for carpeta in set(extensiones.values()):
     ruta_carpeta= os.path.join(ruta,carpeta)
 
     if not os.path.exists(ruta_carpeta):
@@ -15,14 +23,12 @@ for carpeta in tipos:
 
 #mover archivos segun la extensión
 for archivo in os.listdir(ruta):
-    if archivo.endswith(".png") or archivo.endswith(".jpg") or archivo.endswith(".jpeg"):
-        shutil.move(os.path.join(ruta, archivo), 
-            os.path.join(ruta, "Imágenes", archivo))  
+    ruta_archivo= os.path.join(ruta,archivo)
 
-    elif archivo.endswith(".pdf") or archivo.endswith(".odt"):
-        shutil.move(os.path.join(ruta, archivo),
-                    os.path.join(ruta, "PDFs", archivo))      
-        
-    elif archivo.endswith(".pdf") or archivo.endswith(".txt"):
-        shutil.move(os.path.join(ruta, archivo),
-                    os.path.join(ruta, "Documentos_txt", archivo)) 
+    if os.path.isfile(ruta_archivo):
+        nombre,extension= os.path.splitext(archivo)
+        extension= extension.lower()
+
+        if extension in extensiones:
+            destino= os.path.join(ruta, extensiones[extension], archivo)
+            shutil.move(ruta_archivo, destino)
