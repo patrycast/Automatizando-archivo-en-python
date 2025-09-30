@@ -14,10 +14,10 @@ Las carpetas que crea automáticamente son:
    git clone https://github.com/patrycast/Automatizando-archivo-en-python.git
 
 2. Ingresar al directorio:
- cd Automatizando-archivo-en-python
+ cd Automatizando-archivo-en-python (nombre de mi carpeta)
 
 3.Ejecutar el script:
-python ordenar-archivo-carpeta.py
+python ordenar-archivo-carpeta.py (nombre de mi archivo)
 
 4.Ingresar la ruta de la carpeta que querés organizar cuando el programa lo solicite.
 
